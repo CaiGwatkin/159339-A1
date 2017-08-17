@@ -110,5 +110,15 @@ class Account
         }
     }
 
+    /**
+     * Creates and returns a string of data about the account.
+     *
+     * @return string The Account object as a string: "ID BALANCE"
+     */
+    public function __toString()
+    {
+        return $this->_id . ' ' . $this->_balance;
+    }
+
     // }}}
 }
