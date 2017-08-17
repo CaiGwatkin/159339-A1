@@ -1,20 +1,59 @@
 <?php
 /* GWATKIN 15146508 A1 */
 
-namespace caigwatkin\A1;
+/**
+ * Account class file.
+ *
+ * PHP version 7.1
+ *
+ * @package     cgwatkin\A1
+ * @author      Cai Gwatkin <caigwatkin@gmail.com>
+ * @license     https://opensource.org/licenses/MIT  The MIT License
+ */
+
+namespace cgwatkin\A1;
 
 /**
- * Class Account
+ * # Class Account
  *
  * A bank account with an ID and balance which can process transactions.
  *
- * @package caigwatkin\A1
+ * ## Code examples:
+ * ```
+ * // Create new instance
+ * $account = new Account((int) $id, (float) $balance);
+ *
+ * // Update balance, surround in try/catch block as exception is thrown if bad transaction.
+ * try {
+ *     $account.updateBalance($type, (float) $amount);
+ * }
+ * catch (BadTranzException) { // Deal with bad transaction. }
+ *
+ * // Get data
+ * $id = $account->getId();
+ * $balance = $account->getBalance();
+ * ```
+ *
+ * @package cgwatkin\A1
+ * @see     BadTranzException The exception generated when a bad transaction is attempted to be processed.
  */
 class Account
 {
+    // {{{ properties
+
+    /**
+     * @var int $_id The account ID number.
+     */
     private $_id;
+
+    /**
+     * @var float The balance of the account.
+     */
     private $_balance;
 
+    // }}}
+
+    // {{{ methods
     /**
      * Account constructor.
      *
@@ -48,16 +87,6 @@ class Account
     }
 
     /**
-     * Creates and returns a string of data about the account.
-     *
-     * @return string The Account object as a string: "ID BALANCE"
-     */
-    public function __toString()
-    {
-        return $this->_id . ' ' . $this->_balance;
-    }
-
-    /**
      * Updates the balance of the account.
      *
      * Uses the passed parameter to increase/decrease the account balance.
@@ -66,7 +95,7 @@ class Account
      * @param float $amount The change in balance (positive or negative).
      * @throws BadTranzException
      */
-    public function updateBalance($type, $amount)
+    public function updateBalance($type, float $amount)
     {
         if ($amount < 0.0) {
             throw new BadTranzException('Negative transaction amount', 1);
@@ -80,4 +109,6 @@ class Account
             $this->_balance = $this->_balance + $amount;
         }
     }
+
+    // }}}
 }

@@ -1,7 +1,17 @@
 <?php
 /* GWATKIN 15146508 A1 */
 
-namespace caigwatkin\A1;
+/**
+ * ATM class file.
+ *
+ * PHP version 7.1
+ *
+ * @package     cgwatkin\A1
+ * @author      Cai Gwatkin <caigwatkin@gmail.com>
+ * @license     https://opensource.org/licenses/MIT  The MIT License
+ */
+
+namespace cgwatkin\A1;
 
 /**
  * # Class ATM
@@ -58,11 +68,12 @@ namespace caigwatkin\A1;
  * @see BadTranz                        The bad transaction class.
  * @see BadTranzException               The bad transaction exception.
  *
- * @package caigwatkin\A1
+ * @package cgwatkin\A1
  */
-// TODO: link code snippets to function documentation
 class ATM
 {
+    // {{{ properties
+
     /**
      * @var array The accounts loaded into the ATM (id => balance).
      */
@@ -77,6 +88,10 @@ class ATM
      * @var array The BadTranz objects containing the details of attempted bad transactions.
      */
     private $_badTransactions;
+
+    // }}}
+
+    // {{{ methods
 
     /**
      * ATM constructor.
@@ -178,7 +193,7 @@ class ATM
                 }
                 try {
                     $this->checkIfAccount($id);
-                    $this->_accounts[$id]->updateBalance($type, $amount);
+                    $this->_accounts[$id]->updateBalance($type, (float) $amount);
                     $this->_numValidTransactions++;
                 } catch (BadTranzException $badTranzException) {
                     $this->_badTransactions[] = new BadTranz($lineNum, $id,
@@ -213,4 +228,5 @@ class ATM
             throw new \Exception($message);
         }
     }
+    // }}}
 }
